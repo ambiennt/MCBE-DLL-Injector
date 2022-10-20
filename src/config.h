@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include <fstream>
-#include <algorithm>
-
 extern char working_dir[1024];
 extern bool customProcName;
 extern std::wstring delaystr;

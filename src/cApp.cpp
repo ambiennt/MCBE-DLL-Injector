@@ -9,13 +9,6 @@ cMain* ref; // I am to dumb for all this,
 
 wxIMPLEMENT_APP(cApp);
 
-cApp::cApp() {
-
-}
-
-cApp::~cApp() {
-
-}
 bool cApp::OnInit() {
 
     char* shut_up_VS = _getcwd(working_dir, FILENAME_MAX);

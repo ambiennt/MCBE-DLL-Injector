@@ -72,7 +72,7 @@ public:
                      // as wxTE_PASSWORD and we definitely don't want to show
                      // asterisks in spin control. We also want to respect
                      // wxTE_PROCESS and the border flags as well.
-                     style & (wxALIGN_MASK | wxBORDER_MASK | wxTE_PROCESS_ENTER)
+                     style & ((long)wxALIGN_MASK | (long)wxBORDER_MASK | wxTE_PROCESS_ENTER)
                            & ~wxTE_PASSWORD)
     {
         m_spin = spin;

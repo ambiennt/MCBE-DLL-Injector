@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "inject.h"
 
-#include <TlHelp32.h>
-
 DWORD GetProcId(const char *procName)
 
 {
