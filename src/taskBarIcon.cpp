@@ -10,9 +10,7 @@ EVT_MENU(302, taskBarIcon::onOpenMenu)
 EVT_TASKBAR_LEFT_DCLICK(taskBarIcon::onTaskBarDClick)
 wxEND_EVENT_TABLE();
 
-wxMenu *taskBarIcon::CreatePopupMenu()
-{
-
+wxMenu *taskBarIcon::CreatePopupMenu() {
     menu = new wxMenu();
     menu->Append(301, "Inject");
     menu->Append(302, "Open");
@@ -20,31 +18,22 @@ wxMenu *taskBarIcon::CreatePopupMenu()
     return menu;
 }
 
-void taskBarIcon::onTaskBarDClick(wxTaskBarIconEvent &evt)
-{
-
+void taskBarIcon::onTaskBarDClick(wxTaskBarIconEvent &evt) {
     ref->Show();
-
     evt.Skip();
 }
 
-void taskBarIcon::onInjectMenu(wxCommandEvent &evt)
-{
-
+void taskBarIcon::onInjectMenu(wxCommandEvent &evt) {
     cMain::OnInjectButtonExecute(evt, ref);
-
     evt.Skip();
 }
 
-void taskBarIcon::onCloseMenu(wxCommandEvent &evt)
-{
+void taskBarIcon::onCloseMenu(wxCommandEvent &evt) {
     ref->Close();
     evt.Skip();
 }
 
-void taskBarIcon::onOpenMenu(wxCommandEvent &evt)
-{
-
+void taskBarIcon::onOpenMenu(wxCommandEvent &evt) {
     ref->Show();
     evt.Skip();
 }

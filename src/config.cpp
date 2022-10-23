@@ -6,118 +6,89 @@
 #include <algorithm>
 #include <direct.h>
 
-std::string path;
-
-// Config name and state
-std::wstring name;
-std::wstring value;
-
-// generated Config str
-std::wstring configstr;
-
-char working_dir[1024];
-bool customProcName = false;
-std::wstring delaystr = L"5";
-std::wstring dllPath = L"Click \"Select\" to select the DLL file";
-std::wstring procName = L"Minecraft.Windows.exe";
-
-
-
-
 config::config() {
-    path = working_dir;
-    path += "\\config.txt";
+    this->path = Globals::WORKING_DIR;
+    this->path += "\\config.txt";
 }
 
 bool config::loadConfig() {
-    std::wifstream cFile(path);
-    if (cFile.is_open())
-    {
-        std::wstring line;
-        while (getline(cFile, line)) {
-            if (line[0] == '#' || line.empty())
-                continue;
-            size_t delimiterPos = line.find('=');
-            name = line.substr(0, delimiterPos);
+    std::wifstream cFile(this->path);
 
-            value = line.substr(delimiterPos + 1);
+    if (cFile.is_open()) {
+        std::wstring line;
+        while (std::getline(cFile, line)) {
+
+            if (line[0] == '#' || line.empty()) {
+                continue;
+            }
+
+            size_t delimiterPos = line.find('=');
+            this->name = line.substr(0, delimiterPos);
+
+            this->value = line.substr(delimiterPos + 1);
             // std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c) { return std::tolower(c); });
-            analyseState();
+            this->analyzeState();
         }
-        return false;
-    }
-    else {
         return true;
     }
+
+    // can't load config file, so we generate a new one via config::saveConfig
+    return false;
 }
 
 bool config::saveConfig() {
-    std::wofstream create(path);
+    std::wofstream create(this->path);
     if (create.is_open()) {
-        std::wstring configstr = makeConfig();
+        std::wstring configstr = this->makeConfig();
         create << configstr;
     }
     else {
         wxMessageBox("Can't create config file!", "ERROR", wxICON_ERROR);
-        //std::cout << "Couldn't create config file on " + path << std::endl;
-        return true;
-    }
-    return false;
-}
-
-bool config::analyseBool() {
-    std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c) { return std::tolower(c); });
-    if (value == "true" || value == "1") {
-        std::cout << name << " " << "true" << '\n';
-        return true;
-    }
-    else {
-        std::cout << name << " " << "false" << '\n';
         return false;
     }
+
+    return true;
+}
+
+bool config::analyzeBool() {
+    std::transform(this->value.begin(), this->value.end(), this->value.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+    return ((this->value == "true") || (this->value == "1"));
 }
 
 int config::analyseInt() {
-    if (std::all_of(value.begin(), value.end(), ::isdigit)) {
-        std::cout << name << " " << value << '\n';
-        return std::stoi(value);
+    if (std::all_of(this->value.begin(), this->value.end(), ::isdigit)) {
+        return std::stoi(this->value);
     }
-    else {
-        std::cout << name << " is not parsable \"" << value << "\"\n";
-        return 0;
-    }
+    return 0;
 }
 
 std::wstring config::makeConfig() {
 
-    configstr += L"# MCBE DLL injector config\n";
+    this->configstr += L"# MCBE DLL injector config\n";
 
-    //customProcName
-    configstr += customProcName == true ? L"customProcName=true\n" : L"customProcName=false\n";
-    //delaystr
-    configstr += L"delaystr=" + delaystr + '\n';
-    //dllPath
-    configstr += L"dllPath=" + dllPath + '\n';
-    //procName
-    configstr += L"procName=" + procName + '\n';
+    // useCustomProcName
+    this->configstr += Globals::USE_CUSTOM_PROC_NAME ? L"useCustomProcName=true\n" : L"useCustomProcName=false\n";
+    // dllPath
+    this->configstr += L"dllPath=" + Globals::DLL_PATH + '\n';
+    // procName
+    this->configstr += L"procName=" + Globals::PROC_NAME + '\n';
 
-    return configstr;
+    return this->configstr;
 }
 
-void config::analyseState() {
-    if (name == "customProcName") {
-        customProcName = analyseBool();
+void config::analyzeState() {
+    if (this->name == "useCustomProcName") {
+        Globals::USE_CUSTOM_PROC_NAME = this->analyzeBool();
     }
-    else if (name == "delaystr") {
-        delaystr = value;
+    else if (this->name == "dllPath") {
+        Globals::DLL_PATH = this->value;
     }
-    else if (name == "dllPath") {
-        dllPath = value;
-    }
-    else if (name == "procName") {
-        procName = value;
+    else if (this->name == "procName") {
+        Globals::PROC_NAME = this->value;
     }
     else {
-        wxMessageBox("\"" + name + "\" is not a known entry\nDeleting the config file might help!", "WARNING", wxICON_INFORMATION);
+        wxMessageBox("\"" + this->name + "\" is not a known entry\nDeleting the config file might help!", "WARNING", wxICON_INFORMATION);
     }
 }

@@ -1,14 +1,11 @@
 #pragma once
 
-
 #include "cMain.h"
-
 
 class cApp : public wxApp {
 public:
-	cMain* m_frame1;
-
-	virtual bool OnInit();
+	virtual bool OnInit() override;
 };
  
-extern cMain* ref;
+inline cMain* ref; // I am to dumb for all this,
+                   // Don't do this but yeah...

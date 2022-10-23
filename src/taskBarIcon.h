@@ -1,14 +1,13 @@
 #pragma once
-#include "pch.h"
-class taskBarIcon : public wxTaskBarIcon
-{
 
-private:
+#include "pch.h"
+
+class taskBarIcon : public wxTaskBarIcon {
     wxMenu* menu = nullptr;
 
 protected:
     // creates menu to be displayed when user clicks on the icon
-    virtual wxMenu* CreatePopupMenu();
+    virtual wxMenu* CreatePopupMenu() override;
 
 public:
     void onCloseMenu(wxCommandEvent& evt);

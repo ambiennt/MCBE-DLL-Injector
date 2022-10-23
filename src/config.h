@@ -1,15 +1,18 @@
 #include "pch.h"
 
-extern char working_dir[1024];
-extern bool customProcName;
-extern std::wstring delaystr;
-extern std::wstring dllPath;
-extern std::wstring procName;
+namespace Globals {
+
+    inline char WORKING_DIR[1024]{};
+    inline bool USE_CUSTOM_PROC_NAME = false;
+    inline const std::wstring NO_DLL_PATH_SELECTED_MSG{ L"Click \"Select\" to select a DLL file" };
+    inline std::wstring DLL_PATH{};
+    inline const std::wstring MCBE_PROC_NAME{ L"Minecraft.Windows.exe" };
+    inline std::wstring PROC_NAME{ Globals::MCBE_PROC_NAME };
+
+} //namespace Globals
 
 
 class config {
-
-protected:
     std::string path;
     //Config name and state
     std::wstring name;
@@ -18,18 +21,14 @@ protected:
     // generated Config str
     std::wstring configstr;
 
+    int analyseInt();
+    bool analyzeBool();
+    void analyzeState();
+    std::wstring makeConfig();
+
 public:
     config();
 
-    bool useCDisk();
     bool loadConfig();
     bool saveConfig();
-
-protected:
-
-    int analyseInt();
-    virtual bool analyseBool();
-    virtual void analyseState();
-
-    virtual std::wstring makeConfig();
 };
