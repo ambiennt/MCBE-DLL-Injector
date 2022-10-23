@@ -13,6 +13,10 @@ wxEND_EVENT_TABLE();
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "MCBE DLL Injector", wxDefaultPosition, wxSize(297.5, 162.5),
     wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX | wxCLIP_CHILDREN) {
     
+    if (!this->cfg.serializeConfig()) { // if error
+        this->cfg.updateConfigFile();
+    }
+
     wxIcon icon(icon_xpm);
     this->SetIcon(icon);
 
@@ -40,8 +44,6 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "MCBE DLL Injector", wxDefaultPositi
         this->check_CustomTarget->SetValue(false);
         this->txt_ProcName->Disable();
     }
-
-    this->txt_ProcName->SetLabel(Globals::PROC_NAME);
     
     this->openDialog = new wxFileDialog(this, "Select the .dll file", Globals::WORKING_DIR, "*.dll" ,"Dynamic link library (*.dll)|*.dll", wxFD_OPEN);
 }
@@ -51,8 +53,11 @@ cMain::~cMain() {
 }
 
 void cMain::updateGlobalVars() {
+    static const std::wstring EMPTY_WSTR = std::wstring{};
+    auto pathStr = this->txt_DllPath->GetValue();
+
     Globals::USE_CUSTOM_PROC_NAME = this->check_CustomTarget->GetValue();
-    Globals::DLL_PATH = this->txt_DllPath->GetValue();
+    Globals::DLL_PATH = ((pathStr == Globals::NO_DLL_PATH_SELECTED_MSG) ? EMPTY_WSTR : pathStr); // so we done save this to config later on
     Globals::PROC_NAME = this->txt_ProcName->GetValue();
 }
 
