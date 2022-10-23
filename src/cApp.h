@@ -1,11 +1,12 @@
 #pragma once
 
+#include "config.h"
 #include "cMain.h"
+#include <memory>
 
 class cApp : public wxApp {
 public:
 	virtual bool OnInit() override;
 };
- 
-inline cMain* ref; // I am to dumb for all this,
-                   // Don't do this but yeah...
+
+inline cMain* CMAIN_INSTANCE{};

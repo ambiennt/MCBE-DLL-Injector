@@ -1,4 +1,6 @@
-#include "pch.h"
+#pragma once
+
+#include <string>
 
 namespace Globals {
 
@@ -11,24 +13,18 @@ namespace Globals {
 
 } //namespace Globals
 
-
-class config {
+class Config {
     std::string path;
     //Config name and state
-    std::wstring name;
-    std::wstring value;
+    std::wstring currentKey;
+    std::wstring currentVal;
 
-    // generated Config str
-    std::wstring configstr;
-
-    int analyseInt();
+    int analyzeInt();
     bool analyzeBool();
     void analyzeState();
-    std::wstring makeConfig();
-
 public:
-    config();
+    Config();
 
-    bool loadConfig();
-    bool saveConfig();
+    bool serializeConfig();
+    bool updateConfigFile() const;
 };

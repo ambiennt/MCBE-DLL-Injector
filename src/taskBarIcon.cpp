@@ -19,21 +19,21 @@ wxMenu *taskBarIcon::CreatePopupMenu() {
 }
 
 void taskBarIcon::onTaskBarDClick(wxTaskBarIconEvent &evt) {
-    ref->Show();
+    CMAIN_INSTANCE->Show();
     evt.Skip();
 }
 
 void taskBarIcon::onInjectMenu(wxCommandEvent &evt) {
-    cMain::OnInjectButtonExecute(evt, ref);
+    cMain::OnInjectButtonExecute(evt, *CMAIN_INSTANCE);
     evt.Skip();
 }
 
 void taskBarIcon::onCloseMenu(wxCommandEvent &evt) {
-    ref->Close();
+    CMAIN_INSTANCE->Close();
     evt.Skip();
 }
 
 void taskBarIcon::onOpenMenu(wxCommandEvent &evt) {
-    ref->Show();
+    CMAIN_INSTANCE->Show();
     evt.Skip();
 }

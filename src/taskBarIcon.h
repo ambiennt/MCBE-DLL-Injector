@@ -1,6 +1,7 @@
 #pragma once
 
-#include "pch.h"
+#include <wx/wx.h>
+#include <wx/taskbar.h>
 
 class taskBarIcon : public wxTaskBarIcon {
     wxMenu* menu = nullptr;

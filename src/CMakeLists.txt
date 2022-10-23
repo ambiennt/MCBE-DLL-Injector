@@ -1,4 +1,4 @@
-target_sources(fateInjector PRIVATE cApp.cpp        
+target_sources(${PROJECT_NAME} PRIVATE cApp.cpp        
 cMain.cpp       
 config.cpp      
 FixFilePerms.cpp
@@ -7,4 +7,4 @@ pch.cpp
 taskBarIcon.cpp
 icon.rc)
 
-target_precompile_headers(fateInjector PRIVATE "pch.h")
+target_precompile_headers(${PROJECT_NAME} PRIVATE "pch.h")

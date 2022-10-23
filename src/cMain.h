@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config.h"
 #include "taskBarIcon.h"
 
 class cMain : public wxFrame {
@@ -13,13 +14,17 @@ public:
 	wxCheckBox *check_CustomTarget = nullptr;
 	wxFileDialog *openDialog = nullptr;
 
-	cMain();
-	~cMain();
+	Config cfg;
 
-	static void OnInjectButtonExecute(wxCommandEvent &evt, cMain *ref);
+	cMain();
+	virtual ~cMain() override;
+
+	static void OnInjectButtonExecute(wxCommandEvent &evt, cMain &ref);
 	void OnInjectButton(wxCommandEvent &evt);
 	void OnSelectButton(wxCommandEvent &evt);
 	void OnCustomCheckBox(wxCommandEvent &evt);
+
+	void updateGlobalVars();
 
 	wxDECLARE_EVENT_TABLE();
 };

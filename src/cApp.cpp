@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "cApp.h"
-#include "config.h"
 
 wxIMPLEMENT_APP(cApp);
 
 bool cApp::OnInit() {
 
     char* shut_up_VS = _getcwd(Globals::WORKING_DIR, FILENAME_MAX);
-    config cfg;
-    if (!cfg.loadConfig()) { //if error
-        cfg.saveConfig();
+
+    CMAIN_INSTANCE = new cMain();
+
+    if (!CMAIN_INSTANCE->cfg.serializeConfig()) { //if error
+        CMAIN_INSTANCE->cfg.updateConfigFile();
     }
 
-    ref = new cMain();
-    ref->Show();
+    CMAIN_INSTANCE->Show();
 	return true;
 }

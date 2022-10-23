@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.20)
-project(fateInjector VERSION 0.1.0)
+project(mcbeDllInjector VERSION 1.2.0)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -19,4 +19,3 @@ target_link_libraries(${PROJECT_NAME} wx::net wx::core wx::base)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-

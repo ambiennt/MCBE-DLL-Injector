@@ -1,5 +1,5 @@
 # MCBE DLL Injector
-A Simple and lightweight Minecraft Bedrock Edition DLL injector
+A simple and lightweight Minecraft Bedrock Edition DLL injector
 
 #### Because PC viruses may use simular code to infect computers this might get reconized as a virus. 
 #### BUT this injector does not contain any viruses! Feel free to check the source!

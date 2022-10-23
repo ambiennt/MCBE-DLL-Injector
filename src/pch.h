@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
 #include <wx/wx.h>
 #include <wx/taskbar.h>
 #include <wx/notifmsg.h>
@@ -11,3 +15,12 @@
 #include <string>
 #include <thread>
 #include <algorithm>
+#include <memory>
+
+#include "cApp.h"
+#include "cMain.h"
+#include "config.h"
+#include "FixFilePerms.h"
+#include "inject.h"
+
+#include "icon/icon.xpm"
