@@ -13,9 +13,7 @@
 
 #include <fstream>
 #include <string>
-#include <thread>
 #include <algorithm>
-#include <memory>
 
 #include "cApp.h"
 #include "cMain.h"

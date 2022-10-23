@@ -14,5 +14,5 @@ bool cApp::OnInit() {
     }
 
     CMAIN_INSTANCE->Show();
-	return true;
+    return true;
 }

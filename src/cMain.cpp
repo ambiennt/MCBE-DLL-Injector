@@ -92,7 +92,7 @@ void cMain::OnInjectButtonExecute(wxCommandEvent& evt, cMain& ref) {
     ref.updateGlobalVars();
     ref.cfg.updateConfigFile();
 
-	evt.Skip();
+    evt.Skip();
 }
 
 void cMain::OnSelectButton(wxCommandEvent& evt) {
@@ -103,7 +103,7 @@ void cMain::OnSelectButton(wxCommandEvent& evt) {
     this->updateGlobalVars();
     this->cfg.updateConfigFile();
 
-	evt.Skip();
+    evt.Skip();
 }
 
 void cMain::OnCustomCheckBox(wxCommandEvent& evt) {

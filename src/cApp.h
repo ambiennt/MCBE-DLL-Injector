@@ -1,8 +1,8 @@
 #pragma once
 
 #include "config.h"
-#include "cMain.h"
-#include <memory>
+
+class cMain;
 
 class cApp : public wxApp {
 public:
